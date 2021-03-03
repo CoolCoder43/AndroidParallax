@@ -10,6 +10,7 @@ import androidx.annotation.NonNull
 import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 internal class MoviesAdapter(private var moviesList: List<MovieModel>) :
+
     RecyclerView.Adapter<MoviesAdapter.MyViewHolder>() {
     internal inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var title: TextView = view.findViewById(R.id.title)
@@ -20,6 +21,9 @@ internal class MoviesAdapter(private var moviesList: List<MovieModel>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_row, parent, false)
+        itemView.setOnClickListener {
+            onItemClick?.invoke()
+        }
         return MyViewHolder(itemView)
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -36,8 +40,11 @@ internal class MoviesAdapter(private var moviesList: List<MovieModel>) :
             holder.itemView.background = android.graphics.Color.BLACK.toDrawable()
         }
 
+
     }
     override fun getItemCount(): Int {
         return moviesList.size
     }
+    var onItemClick: (() -> Unit)? = null
+
 }

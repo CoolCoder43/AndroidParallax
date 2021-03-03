@@ -1,5 +1,6 @@
 package com.example.scrolltest
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -61,7 +62,10 @@ class MainActivity : AppCompatActivity() {
 //            }
             //Log.d("TAG", "onCreate: " + sc_h)
         }
-
+        moviesAdapter.onItemClick = {  ->
+            val intent = Intent(this, YoutubeActivity::class.java)
+            startActivity(intent)            // do something with your item
+        }
 
 
 
